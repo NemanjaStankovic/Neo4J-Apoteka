@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <label>Dodaj novu lokaciju</label><br>
+    <label for="text">Ulica i broj:</label><br>
+    <input type="text" id="LokUIB" name="LokUIB"><br>
+    <label for="text">Broj telefona:</label><br>
+    <input type="text" id="LokTel" name="LokTel"><br>
+    <input id="dodajLokacijuDugme" type="button" value="Dodaj Lokaciju"><br>
+    
+    <br><label>Dodaj novu apoteku</label><br>
+    <label for="text">Naziv:</label><br>
+    <input type="text" id="ApoNaziv" name="ApoNaziv"><br>
+    <label for="text">Email:</label><br>
+    <input type="text" id="ApoEmail" name="ApoEmail"><br>
+    <label for="text">Direktor:</label><br>
+    <input type="text" id="ApoDirektor" name="ApoDirektor"><br>
+    <label for="text">Broj Telefona</label><br>
+    <input type="text" id="ApoBrTel" name="ApoBrTel"><br>
+    <select id="myDropdown">
+    </select>
+    <script>
+        fetch("https://localhost:7080/Lokacija/sveLokacije")
+            .then(p => {
+                p.json().then(lokacije => {
+                    lokacije.forEach(lokacija => {
+                       var pom = new Lokacija(lokacija.ulicaBr, lokacija.brojTelefona);
+                        pom.crtajOpcije("myDropdown"); 
+                    });
+                })
+            })
+    </script>
+    <div id="promenaApotekee">
+        <input id="dodajApotekuDugme" type="button" value="Dodaj Apoteku"><br>
+    </div>
+    
+
+    <br><label>Dodaj novi lek</label><br>
+    <label for="text">Naziv:</label><br>
+    <input type="text" id="LekNaziv" name="LekNaziv"><br>
+    <label for="text">Proizvodjac:</label><br>
+    <input type="text" id="LekPro" name="LekPro"><br>
+    <label for="text">Kategorija:</label><br>
+    <input type="text" id="LekKat" name="LekKat"><br>
+    <label for="text">Opis:</label><br>
+    <input type="text" id="LekOpis" name="LekOpis"><br>
+    <div id="promenaLekaa">
+        <input id="dodajProizvodDugme" type="button" value="Dodaj Proizvod">
+    </div>
+    
+    <div>
+        <select id="apotekaDD">
+        </select>
+        <script>
+            fetch("https://localhost:7080/Apoteka/sveApoteke")
+                .then(p => {
+                    p.json().then(lokacije => {
+                        lokacije.forEach(lokacija => {
+                           var pom = new Apoteka(lokacija.naziv, lokacija.email, lokacija.direktor, lokacija.brojTelefona);
+                            pom.crtajOpcije("apotekaDD"); 
+                        });
+                    })
+                })
+        </script>
+        <select id="proizvodiDD">
+        </select>
+        <script>
+            fetch("https://localhost:7080/Proizvod/sviProizvodi")
+                .then(p => {
+                    p.json().then(proizvodi => {
+                        proizvodi.forEach(proizvod => {
+                           var pom = new Proizvod(proizvod.naziv, proizvod.proizvodjac, proizvod.kategorija, proizvod.opis);
+                            pom.crtajOpcije("proizvodiDD"); 
+                        });
+                    })
+                })
+        </script>
+        <input id="proveriKolicinu" type="button" value="Proveri kolicinu">
+        <label for="text" id="kolicinaPrikaz"></label><br>
+        <label for="text">Nova Kolicina:</label>
+        <input type="text" id="lekKol" name="lekKol">
+        <label for="text">Nova Cena:</label>
+        <input type="text" id="lekCena" name="lekCena">
+        <input id="dodajLekUApoteku" type="button" value="Dodaj Lek u Apoteku"><br>
+    </div>
+
+    <div>
+        <select id="apotekaUD">
+        </select>
+        <script>
+            fetch("https://localhost:7080/Apoteka/sveApoteke")
+                .then(p => {
+                    p.json().then(lokacije => {
+                        lokacije.forEach(lokacija => {
+                           var pom = new Apoteka(lokacija.naziv, lokacija.email, lokacija.direktor, lokacija.brojTelefona);
+                            pom.crtajOpcije("apotekaUD"); 
+                        });
+                    })
+                })
+        </script>
+        <input id="apotekaPromeni" type="button" value="Promeni">
+        <input id="apotekaObrisi" type="button" value="Obrisi">
+
+        <select id="proizvodiUD">
+        </select>
+        <script>
+            fetch("https://localhost:7080/Proizvod/sviProizvodi")
+                .then(p => {
+                    p.json().then(proizvodi => {
+                        proizvodi.forEach(proizvod => {
+                           var pom = new Proizvod(proizvod.naziv, proizvod.proizvodjac, proizvod.kategorija, proizvod.opis);
+                            pom.crtajOpcije("proizvodiUD"); 
+                        });
+                    })
+                })
+        </script>
+
+        <input id="proizvodPromeni" type="button" value="Promeni">
+        <input id="proizvodObrisi" type="button" value="Obrisi">
+    </div>
+
+    <script src="js/Apoteka.js"></script>
+    <script src="js/Lokacija.js"></script>
+    <script src="js/Proizvod.js"></script>
+</body>
+</html>
